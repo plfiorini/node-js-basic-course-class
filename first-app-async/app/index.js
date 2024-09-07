@@ -1,29 +1,33 @@
 const mathUtils = require("./math-utils");
 
-console.log("Program will be blocked :(");
+let i = 1;
 
-const response1 = request1(200000);
-console.log("**prime numbers**", response1);
+otherIncomingRequests();
+longRequest(50000);
 
-
-console.log("Now, I'm able to do other works");
-otherRequests();
-
-function otherRequests() {
+/**
+ * DO NOT CHANGE IT
+ */
+function otherIncomingRequests() {
     setInterval(() => {
-        console.log("other requests...");
+        console.log(`Id: ${i++}. Doing new incoming request`);
     }, 50);
 }
 
-function request1(n) {
-    console.log("**calc prime numbers...**");
+/**
+ * DO NOT CHANGE IT
+ * @param {*} n
+ * @returns
+ */
+function longRequest(n) {
+    let id = i++;
+    console.log(`Id: ${id}. Starting blocking request. Find primes from 2 to ${n}`);
     const start = new Date();
 
     const primes = mathUtils.getPrimeNumbersWithinRange(2, n);
 
     const end = new Date();
-    console.log("**end calc prime numbers**. Elapsed ms: ", end.getTime() - start.getTime());
+    console.log(`Id: ${id}. Finished blocking request. Elapsed ms: ${end.getTime() - start.getTime()}`);
 
     return primes;
 }
-

@@ -1,4 +1,10 @@
-function getPrimeNumbersWithinRange(from,to) {
+/**
+ * DO NOT CHANGE IT
+ * @param {*} from
+ * @param {*} to
+ * @returns
+ */
+function getPrimeNumbersWithinRange(from, to) {
     const primes = [];
     for (let i = from; i <= to; i++) {
         if (isPrime(i)) {
@@ -9,6 +15,11 @@ function getPrimeNumbersWithinRange(from,to) {
     return primes;
 }
 
+/**
+ * DO NOT CHANGE IT
+ * @param {*} n
+ * @returns
+ */
 function isPrime(n) {
     for (let i = 2; i < n; i++) {
         if (n % i === 0) {
@@ -16,6 +27,7 @@ function isPrime(n) {
             return false;
         }
         //console.log(`${n} not divisible by: `, i);
+        //console.log("doing cpu intesive work...");
     }
 
     return true;
