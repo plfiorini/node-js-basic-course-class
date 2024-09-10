@@ -3,7 +3,8 @@ const mathUtils = require("./math-utils");
 let i = 1;
 
 otherIncomingRequests();
-longRequest(50000);
+//longRequest(50000);
+longRequest(500);
 
 /**
  * DO NOT CHANGE IT
@@ -40,18 +41,18 @@ async function longRequest(n) {
     console.log(`Id: ${id}. Starting non-blocking request. Find primes from 2 to ${n}`);
 
     for (i = 2; i <= n; i += 10) {
-        setTimeout(() => {
-            const x = i;
-            const y = i + 9;
-            console.log(`Id: ${id}. Elaborating primes from ${x} to ${y}`);
-            const start = new Date();
-            primes += mathUtils.getPrimeNumbersWithinRange(x, y);
-            const end = new Date();
-            console.log(`Id: ${id}. Finished blocking request. Elapsed ms: ${end.getTime() - start.getTime()}`);
-        }, 50);
+        const start = new Date();
+
+        const x = i;
+        const y = i + 9;
+        console.log(`Id: ${id}. Elaborating primes from ${x} to ${y}`);
+        const result = mathUtils.getPrimeNumbersWithinRange(x, y);
+        const end = new Date();
+        console.log(`Id: ${id}. Finished blocking request. Elapsed ms: ${end.getTime() - start.getTime()}`);
+        primes += result;
 
         console.log(`Id: ${id}. Suspended non-blocking request`);
-        await new Promise(r => setTimeout(r, 50));
+        await new Promise(r => setTimeout(r, 125));
     }
 
     console.log("primse", primes);
