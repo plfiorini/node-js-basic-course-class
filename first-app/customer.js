@@ -1,0 +1,18 @@
+export const CustomersList = [
+    { id: 1, name: 'Customer #1', mail: 'info@customer1.com', phone: '123456789' },
+    { id: 2, name: 'Customer #2', mail: 'info@customer2.com', phone: '234567890' },
+    { id: 3, name: 'Customer #3', mail: 'info@customer3.com', phone: '345678901' },
+    { id: 4, name: 'Customer #4', mail: 'info@customer1.com', phone: '123456789' },
+    { id: 5, name: 'Customer #5', mail: 'info@customer2.com', phone: '234567890' },
+    { id: 6, name: 'Customer #6', mail: 'info@customer3.com', phone: '345678901' },
+    { id: 7, name: 'Customer #7', mail: 'info@customer1.com', phone: '123456789' },
+    { id: 8, name: 'Customer #8', mail: 'info@customer2.com', phone: '234567890' },
+    { id: 9, name: 'Customer #9', mail: 'info@customer3.com', phone: '345678901' },
+    { id: 10, name: 'Customer #10', mail: 'info@customer3.com', phone: '345678901' },
+    { id: 11, name: 'Customer #11', mail: 'info@customer3.com', phone: '345678901' },
+    { id: 12, name: 'Customer #12', mail: 'info@customer3.com', phone: '345678901' },
+    { id: 13, name: 'Customer #13', mail: 'info@customer3.com', phone: '345678901' },
+    { id: 14, name: 'Customer #14', mail: 'info@customer3.com', phone: '345678901' },
+    { id: 15, name: 'Customer #15', mail: 'info@customer3.com', phone: '345678901' },
+    { id: 16, name: 'Customer #16', mail: 'info@customer3.com', phone: '345678901' },
+];
