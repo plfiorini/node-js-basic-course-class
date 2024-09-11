@@ -4,6 +4,9 @@ GET http://localhost:3000/books HTTP/1.1
 ### Get books with filters
 GET http://localhost:3000/books?author=new%20author&published_year=2024 HTTP/1.1
 
+### Get books with filters and sort
+GET http://localhost:3000/books?author=new%20author&sort=asc HTTP/1.1
+
 ### Get books with pagination
 GET http://localhost:3000/books?page=1&limit=12 HTTP/1.1
 

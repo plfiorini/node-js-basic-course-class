@@ -12,25 +12,28 @@ const bookRoutes = async (fastify) => {
 
             const author = request.query.author;
             const year = request.query.published_year;
+            const sort = request.query.sort || "desc";
+
             let dbQuery = "SELECT * FROM books";
             let whereArgs = [];
             let queryArgs = [];
-            let paramIndex = 1;
+            let paramIndex = 0;
+            let page = 0;
 
             // Avoid SQL injection
             if (author) {
-                whereArgs.push(`author = $${paramIndex++}`);
+                whereArgs.push(`author = $${++paramIndex}`);
                 queryArgs.push(author);
             }
             if (year) {
-                whereArgs.push(`published_year = $${paramIndex++}`);
+                whereArgs.push(`published_year = $${++paramIndex}`);
                 queryArgs.push(year);
             }
             if (whereArgs.length > 0) {
                 dbQuery += " WHERE " + whereArgs.join(' AND ');
             }
 
-            dbQuery += ` LIMIT $${paramIndex++} OFFSET $${paramIndex}`;
+            dbQuery += ` ORDER BY published_year ${sort} NULLS FIRST LIMIT $${++paramIndex} OFFSET $${++paramIndex}`;
 
             if (request.query.limit != null) {
                 limits = parseInt(request.query.limit);
@@ -40,6 +43,8 @@ const bookRoutes = async (fastify) => {
                 if (page < 0) page = 0;
                 offset = limits * page;
             }
+
+            console.log(`🔍🔍🔍 Query: ${dbQuery}, Args: ${queryArgs}, Limits: ${limits}, Offset: ${offset}`);
 
             const {rows} = await client.query(dbQuery, [...queryArgs, limits, offset]);
             const result = {

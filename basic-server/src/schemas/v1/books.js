@@ -29,6 +29,7 @@ const getBooksOpts = {
                 published_year: { type: 'integer' },
                 page: { type: 'integer' },
                 limit: { type: 'integer' },
+                sort: { type: 'string', enum: ['asc', 'desc'] },
             },
         },
         response: {
