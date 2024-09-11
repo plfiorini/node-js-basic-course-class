@@ -10,6 +10,16 @@ const bookSchema = {
     required: ['id', 'title', 'author', 'isbn', 'published_year'],
 };
 
+const bookSchemaPaginated = {
+    type: 'object',
+    properties: {
+        books: { type: 'array', items: bookSchema },
+        page: { type: 'integer' },
+        limit: { type: 'integer' },
+    },
+    required: ['books', 'page', 'limit'],
+};
+
 const getBooksOpts = {
     schema: {
         query: {
@@ -22,10 +32,7 @@ const getBooksOpts = {
             },
         },
         response: {
-            200: {
-                type: 'array',
-                items: bookSchema,
-            },
+            200: bookSchemaPaginated,
         },
     }
 };

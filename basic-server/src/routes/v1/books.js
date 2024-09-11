@@ -40,10 +40,14 @@ const bookRoutes = async (fastify) => {
                 if (page < 0) page = 0;
                 offset = limits * page;
             }
-            console.log(`**************************** ${dbQuery}`);
 
             const {rows} = await client.query(dbQuery, [...queryArgs, limits, offset]);
-            reply.send(rows);
+            const result = {
+                books: rows,
+                page: page + 1,
+                limit: limits,
+            };
+            reply.send(result);
         } catch (err) {
             request.log.error(`Error listing all books: ${inspect(err)}`);
             throw err;
