@@ -1,4 +1,5 @@
 const build = require('./app');
+const env = require('./config/env');
 
 const app = build({
   logger: true,
@@ -23,7 +24,11 @@ const app = build({
     docExpansion: 'full',
     deepLinking: false,
   },
-});
+},
+{
+  connectionString: env.POSTGRES_DB_CONNECTION,
+}
+);
 
 app.listen({ port: 3000, host: 'localhost' }, (err, address) => {
   if (err) {
