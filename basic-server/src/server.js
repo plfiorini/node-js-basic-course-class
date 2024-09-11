@@ -1,9 +1,28 @@
 const build = require('./app');
 
-const app = build({ logger: true })
-
-app.get('/', async (request, reply) => {
-  return { hello: 'world' };
+const app = build({
+  logger: true,
+}, {
+  openapi: {
+    openapi: "3.0.0",
+    info: {
+      title: "Library API",
+      description: "Library management API",
+      version: "1.0.0",
+    },
+    servers: [
+      {
+        url: "http://localhost:3000",
+        description: "Development server"
+      },
+    ]
+  }
+}, {
+  routePrefix: "/docs",
+  uiConfig: {
+    docExpansion: 'full',
+    deepLinking: false,
+  },
 });
 
 app.listen({ port: 3000, host: 'localhost' }, (err, address) => {
