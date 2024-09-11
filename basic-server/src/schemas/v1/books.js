@@ -1,11 +1,11 @@
 const bookSchema = {
     type: 'object',
     properties: {
-        id: { type: 'integer' },
-        title: { type: 'string' },
-        author: { type: 'string' },
-        isbn: { type: 'string', default: null },
-        published_year: { type: 'integer', default: null },
+        id: { type: 'integer', description: 'The unique identifier of the book' },
+        title: { type: 'string', description: 'The title of the book' },
+        author: { type: 'string', description: 'The author of the book' },
+        isbn: { type: 'string', default: null, description: 'The ISBN of the book' },
+        published_year: { type: 'integer', default: null, description: 'The published year of the book' },
     },
     required: ['id', 'title', 'author', 'isbn', 'published_year'],
 };
@@ -13,27 +13,35 @@ const bookSchema = {
 const bookSchemaPaginated = {
     type: 'object',
     properties: {
-        books: { type: 'array', items: bookSchema },
-        page: { type: 'integer' },
-        limit: { type: 'integer' },
+        books: { type: 'array', items: bookSchema, description: 'The list of books' },
+        page: { type: 'integer', description: 'The current page' },
+        limit: { type: 'integer', description: 'The number of books per page' },
     },
     required: ['books', 'page', 'limit'],
 };
 
 const getBooksOpts = {
     schema: {
+        description: 'Get all books',
         query: {
             type: 'object',
             properties: {
-                author: { type: 'string' },
-                published_year: { type: 'integer' },
-                page: { type: 'integer' },
-                limit: { type: 'integer' },
-                sort: { type: 'string', enum: ['asc', 'desc'] },
+                author: { type: 'string', description: 'The author of the book' },
+                published_year: { type: 'integer', description: 'The published year of the book' },
+                page: { type: 'integer', description: 'The page number' },
+                limit: { type: 'integer', description: 'The number of books per page' },
+                sort: { type: 'string', enum: ['asc', 'desc'], description: 'The sort order' },
             },
         },
         response: {
-            200: bookSchemaPaginated,
+            200: {
+                description: 'Books and pagination information',
+                content: {
+                    'application/json': {
+                        schema: bookSchemaPaginated,
+                    },
+                },
+            },
         },
     }
 };
@@ -43,12 +51,19 @@ const getBookOpts = {
         params: {
             type: 'object',
             properties: {
-                id: { type: 'integer' },
+                id: { type: 'integer', description: 'The unique identifier of the book' },
             },
             required: ['id'],
         },
         response: {
-            200: bookSchema,
+            200: {
+                description: 'Book information',
+                content: {
+                    'application/json': {
+                        schema: bookSchema,
+                    },
+                },
+            },
         },
     },
 };
@@ -58,15 +73,22 @@ const postBookOpts = {
         body: {
             type: 'object',
             properties: {
-                title: { type: 'string' },
-                author: { type: 'string' },
-                isbn: { type: 'string', default: null },
-                published_year: { type: 'integer', default: null },
+                title: { type: 'string', description: 'The title of the book' },
+                author: { type: 'string', description: 'The author of the book' },
+                isbn: { type: 'string', default: null, description: 'The ISBN of the book' },
+                published_year: { type: 'integer', default: null, description: 'The published year of the book' },
             },
             required: ['title', 'author', 'isbn', 'published_year'],
         },
         response: {
-            200: bookSchema,
+            200: {
+                description: 'Book information',
+                content: {
+                    'application/json': {
+                        schema: bookSchema,
+                    },
+                },
+            },
         },
     },
 };
@@ -76,15 +98,22 @@ const putBookOpts = {
         body: {
             type: 'object',
             properties: {
-                title: { type: 'string' },
-                author: { type: 'string' },
-                isbn: { type: 'string', default: null },
-                published_year: { type: 'integer', default: null },
+                title: { type: 'string', description: 'The title of the book' },
+                author: { type: 'string', description: 'The author of the book' },
+                isbn: { type: 'string', default: null, description: 'The ISBN of the book' },
+                published_year: { type: 'integer', default: null, description: 'The published year of the book'},
             },
             required: ['title', 'author', 'isbn', 'published_year'],
         },
         response: {
-            200: bookSchema,
+            200: {
+                description: 'Book information',
+                content: {
+                    'application/json': {
+                        schema: bookSchema,
+                    },
+                },
+            },
         },
     },
 };
@@ -94,12 +123,19 @@ const deleteBookOpts = {
         params: {
             type: 'object',
             properties: {
-                id: { type: 'integer' },
+                id: { type: 'integer', description: 'The unique identifier of the book'},
             },
             required: ['id'],
         },
         response: {
-            200: bookSchema,
+            200: {
+                description: 'Book information',
+                content: {
+                    'application/json': {
+                        schema: bookSchema,
+                    },
+                },
+            },
         },
     },
 };
