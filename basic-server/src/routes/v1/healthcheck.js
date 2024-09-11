@@ -7,9 +7,9 @@ const healthCheck = async (fastify) => {
             const { rows } = await client.query("SELECT now()");
             reply.send(rows[0]);
         } catch (err) {
-            reply.code(500).send("Error connecting to the database");
+            request.log.error(err);
         } finally {
-            client.disconnect();
+            client.release();
         }
     });
 };
