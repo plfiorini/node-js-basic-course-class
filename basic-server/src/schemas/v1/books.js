@@ -20,6 +20,8 @@ const bookSchemaPaginated = {
     required: ['books', 'page', 'limit'],
 };
 
+const securitySchema = [{ bearerAuth: [] }];
+
 const getBooksOpts = {
     schema: {
         description: 'Get all books',
@@ -43,6 +45,7 @@ const getBooksOpts = {
                 },
             },
         },
+        security: securitySchema,
     }
 };
 
@@ -65,6 +68,7 @@ const getBookOpts = {
                 },
             },
         },
+        security: securitySchema,
     },
 };
 
@@ -90,6 +94,7 @@ const postBookOpts = {
                 },
             },
         },
+        security: securitySchema,
     },
 };
 
@@ -115,6 +120,7 @@ const putBookOpts = {
                 },
             },
         },
+        security: securitySchema,
     },
 };
 
@@ -137,6 +143,7 @@ const deleteBookOpts = {
                 },
             },
         },
+        security: securitySchema,
     },
 };
 

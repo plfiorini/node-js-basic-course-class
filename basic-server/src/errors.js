@@ -8,6 +8,20 @@ class ApiError extends Error {
     }
 }
 
+class AuthenticationError extends ApiError {
+    constructor(message) {
+        super(401, message);
+        this.name = "Authentication Error";
+    }
+}
+
+class ForbiddenError extends ApiError {
+    constructor(message) {
+        super(403, message);
+        this.name = "Forbidden Error";
+    }
+}
+
 class NotFoundError extends ApiError {
     constructor(message) {
         super(404, message);
@@ -17,5 +31,7 @@ class NotFoundError extends ApiError {
 
 module.exports = {
     ApiError,
+    AuthenticationError,
+    ForbiddenError,
     NotFoundError,
 };

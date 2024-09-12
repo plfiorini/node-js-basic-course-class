@@ -1,8 +1,9 @@
 const {inspect} = require("util");
+const {signupOpts, signinOpts} = require("../../schemas/v1/auth");
 const {BadRequestError, NotFoundError} = require("../../errors");
 
 const authRoutes = async (fastify) => {
-    fastify.post("/signup", async (request, reply) => {
+    fastify.post("/signup", signupOpts, async (request, reply) => {
         const client = await fastify.pg.connect();
         try {
             let {role, username, password} = request.body;
@@ -34,7 +35,7 @@ const authRoutes = async (fastify) => {
         }
     });
 
-    fastify.post("/signin", async (request, reply) => {
+    fastify.post("/signin", signinOpts, async (request, reply) => {
         const client = await fastify.pg.connect();
         try {
             let {username, password} = request.body;

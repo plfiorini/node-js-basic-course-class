@@ -13,7 +13,7 @@ const app = build({
     },
     servers: [
       {
-        url: "http://localhost:3000",
+        url: "http://localhost:3001",
         description: "Development server"
       },
     ]
@@ -33,7 +33,7 @@ const app = build({
 }
 );
 
-app.listen({ port: 3000, host: 'localhost' }, (err, address) => {
+app.listen({ port: 3001, host: 'localhost' }, (err, address) => {
   if (err) {
     app.log.error(err);
     process.exit(1);
